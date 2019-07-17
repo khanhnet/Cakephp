@@ -16,7 +16,7 @@
       <th scope="row"><?=$item['User']['id'] ?></th>
       <td><?=$item['User']['name'] ?></td>
       <td><?=$item['User']['username'] ?></td>
-      <td>@<?=$item['User']['email'] ?></td>
+      <td><?=$item['User']['email'] ?></td>
       <td>
          <?php echo $this->Html->link( '<button type="button" class=" btn btn-success">Sửa</button>', 
          array('action' => 'edit',$item['User']['id'] ),
