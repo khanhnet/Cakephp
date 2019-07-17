@@ -14,6 +14,8 @@ echo $this->Form->create('User');
     echo $this->Form->input('name');
     echo $this->Form->input('username');
     echo $this->Form->input('email');
+    echo $this->Form->input('image');
+    echo $this->Form->input('profile');
     echo $this->Form->input('password', array('type'=>'password'));
      
 echo $this->Form->end('Submit');

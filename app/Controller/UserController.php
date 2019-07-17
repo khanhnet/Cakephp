@@ -27,6 +27,8 @@ class UserController extends AppController{
     }
 
     function add(){
+     
+
       if ($this->request->is('post')){
         if ($this->User->save($this->request->data)){
           $this->Session->setFlash('Thêm mới thành công');
@@ -41,13 +43,19 @@ class UserController extends AppController{
     function edit() {
    
       $id = $this->request->params['pass'][0];
-      $this->Profile->User->id = $id;
-
+      $this->User->id = $id;
+      $arr=array('profile'=>$this->request->data['User']['profile'],
+        'image'=>$this->request->data['User']['image'],
+        'id_user'=>$id
+      );
 
       if( $this->User->exists() ){
 
         if( $this->request->is( 'post' ) || $this->request->is( 'put' ) ){
+          
+
           if( $this->User->save( $this->request->data ) ){
+            $this->Profile->save( $arr );
 
             $this->Session->setFlash('Sửa thành công');
 
