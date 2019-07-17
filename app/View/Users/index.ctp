@@ -18,7 +18,10 @@
       <td><?=$item['User']['username'] ?></td>
       <td><?=$item['User']['email'] ?></td>
       <td>
-         <?php echo $this->Html->link( '<button type="button" class=" btn btn-success">Sửa</button>', 
+         <?php echo $this->Html->link( '<button type="button" class=" btn btn-success">Chi tiết</button>', 
+         array('action' => 'detail',$item['User']['id'] ),
+         array('escape' => false) ); ?>
+         <?php echo $this->Html->link( '<button type="button" class=" btn btn-warning">Sửa</button>', 
          array('action' => 'edit',$item['User']['id'] ),
          array('escape' => false) ); ?>
          <?php echo $this->Form->postLink( '<button type="button" class=" btn btn-danger">Xóa</button>', 

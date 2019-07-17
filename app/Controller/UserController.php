@@ -1,15 +1,29 @@
 <?php
 class UserController extends AppController{
-  var $uses = array('User');
+  var $uses = array('User','Profile');
     public $name = "Users"; // tên của Controller User
     function index(){
       $data = $this->User->find("all");
+      
+
       $this->paginate = array(
                                 'limit' => 4,
                                 'order' => array('title' => 'desc'),
                              );
        $data = $this->paginate("User");
       $this->set("data",$data);
+    }
+
+    function detail(){
+        $id = $this->request->params['pass'][0];
+      $this->User->id = $id;
+
+      if( $this->User->exists() ){
+        $data= $this->Profile->User->findAllById($id);
+      $this->set("data",$data);
+      }
+
+      
     }
 
     function add(){
@@ -27,7 +41,8 @@ class UserController extends AppController{
     function edit() {
    
       $id = $this->request->params['pass'][0];
-      $this->User->id = $id;
+      $this->Profile->User->id = $id;
+
 
       if( $this->User->exists() ){
 
@@ -68,7 +83,8 @@ class UserController extends AppController{
           $this->redirect(array('action'=>'index'));
 
         }else{
-          if( $this->User->delete( $id ) ){
+          if( $this->User->delete( $id )  ){
+            $this->Profile->User->delete( $id );
             $this->Session->setFlash('Xóa thành công');
             $this->redirect(array('action'=>'index'));
 
